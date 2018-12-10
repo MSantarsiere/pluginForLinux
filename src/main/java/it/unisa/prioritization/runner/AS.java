@@ -79,7 +79,7 @@ public class AS {
 
         new SolutionListOutput(population)
                 .setSeparator(",")
-                .setVarFileOutputContext(new DefaultFileOutputContext(outputFolder + "VAR.txt"))
+                .setVarFileOutputContext(new DefaultFileOutputContext(outputFolder + "/VAR.txt"))
                 .print();
 
         printAFDPc(problem, population, outputFolder, 1);
