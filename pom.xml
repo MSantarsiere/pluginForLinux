@@ -30,12 +30,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+   
     </properties>
     
+     
     
     
-    
- 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.googlecode.efficient-java-matrix-library/ejml -->
 
@@ -107,7 +107,12 @@
         <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
     </distributionManagement>
-    
+    <profiles>
+        <profile>
+          <id>profile-1</id>
+    <activation>
+      <activeByDefault>true</activeByDefault>
+    </activation>
     <build>
         <plugins>                  
             <!--serve per evitare il bug del descrittore -->
@@ -157,7 +162,80 @@
                 </executions>
             </plugin>   
               
-            <plugin>
+             
+        </plugins>
+    </build>
+        </profile>
+<profile>
+      <id>release</id>
+      <activation>
+          <property>
+              <name>release</name>
+          </property>
+      </activation>
+
+      <build>
+          <plugins>
+              <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <!-- see http://jira.codehaus.org/browse/MNG-5346 -->
+                    <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>mojo-descriptor</id>
+                        <goals>
+                            <goal>descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin> 
+              <!-- To release to Maven central -->
+              <plugin>
+                  <groupId>org.sonatype.plugins</groupId>
+                  <artifactId>nexus-staging-maven-plugin</artifactId>
+                  <version>1.6.8</version>
+                  <extensions>true</extensions>
+                  <configuration>
+                      <serverid>ossrh</serverid>
+                      <nexusurl>https://oss.sonatype.org/</nexusurl>
+                      <autoreleaseafterclose>true</autoreleaseafterclose>
+                  </configuration>
+              </plugin>
+              <!-- To generate javadoc -->
+              <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-source-plugin</artifactId>
+                  <version>3.0.1</version>
+                  <executions>
+                      <execution>
+                          <id>attach-sources</id>
+                          <goals>
+                              <goal>jar-no-fork</goal>
+                          </goals>
+                      </execution>
+                  </executions>
+              </plugin>
+              <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-javadoc-plugin</artifactId>
+                  <version>2.10.4</version>
+                  <executions>
+                      <execution>
+                          <id>attach-javadocs</id>
+                          <goals>
+                              <goal>jar</goal>
+                          </goals>
+                      </execution>
+                  </executions>
+              </plugin>
+
+              <!-- To sign the artifacts -->
+              <plugin>
                   <groupId>org.apache.maven.plugins</groupId>
                   <artifactId>maven-gpg-plugin</artifactId>
                   <version>1.6</version>
@@ -170,7 +248,11 @@
                           </goals>
                       </execution>
                   </executions>
-              </plugin>           
-        </plugins>
-    </build>
+              </plugin>
+          </plugins>
+
+      </build>
+  </profile>
+
+    </profiles>
 </project>
