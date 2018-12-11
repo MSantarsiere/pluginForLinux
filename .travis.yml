@@ -1,4 +1,28 @@
-
 language: java
-
-script: mvn clean verify
+env:
+  global:
+  - secure: the base64 string from when you encrypted OSSRH_JIRA_USERNAME
+  - 
+  - secure: the base64 string from when you encrypted OSSRH_JIRA_PASSWORD
+  - 
+  - secure: the base64 string from when you encrypted GPG_KEY_NAME
+  - 
+  - secure: the base64 string from when you encrypted GPG_PASSPHRASE
+  - 
+install: mvn install -P !build-extras -DskipTests=true -Dmaven.javadoc.skip=true -B
+  -V
+script: mvn test -P !build-extras -B
+cache:
+  directories:
+  - "~/.m2/repository"
+after_success:
+- "./cd/before-deploy.sh"
+- "./cd/deploy.sh"
+deploy:
+  provider: releases
+  api_key:
+    secure: mvZXY2L+VtF3tDrPjlDEBoajoHk75boDTqf2YNMA578MrPenkF3ghqOnS2d19MwbRRHNSj4Nt9E/+aLnxZnxXxpx7dBEh09AUUZhC8edLY7iF5fENOMoP5U+1y2G0CCY2NGFATQaNHiWrfz0IB9zr9nnILVHDbH3s+Tz9XgmMnaW1hmf/kLEMYJy9UbzCRgl1XcAUrZ/fm1buMYISWPlDMX+uJJHLf3lrope+bgIxMAQSWRr9npzMtVecLvLQmvDyRKvOGk5Fgtcvv22EuPqhT6izqmCe+wx9LlQRyp/JxrrvC72AbBlQCVnOLSWZXe3SZGoTyD8uQmXrjEVKo3diKk3AVK0yYEAR0kMCpSwbtarZab8eiuKAqNTJWre8z6pb8kYF9x31jIsnuQfYxeS5rkw+A1it6qa2j/7ojckj3BCeeNAf/XwF73dbIPR0VNJIO4R0PIPXFc+oqtb30HMSimrUgz5Ou3A29rvp2TdqRP70i02iD+0Uz4i4qk8MpDArGLM13tiVRyHfbhC7qL85lIu/kIC0aL1cz/gC947/Rr2YNK5OBuyhAUINfCVMmrBzpYdn2WNZCCkOcPEDzC5SSuT7PXpAHteMpwQ3VxowbJgXRQr7D1vuOonzPe7W2S4px5q781AqeNYnjmHwanSYM2m71fTa+5VuRMiXkIHoHY=
+  file: '/Pluggin-master/target/dado-0.10.jar'
+  on:
+    repo: MSantarsiere/pluginForLinux
+name: "forse va"
