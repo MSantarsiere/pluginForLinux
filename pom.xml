@@ -14,8 +14,8 @@
     </licenses>
     <scm>
         <url>https://github.com/MSantarsiere</url>
-        <connection>scm:git:git://github.com/MSantarsiere/progettoforlinux.git</connection>
-        <developerConnection>scm:git:git://github.com/MSantarsiere/progettoforlinux.git</developerConnection>
+        <connection>scm:git:https://github.com/MSantarsiere/progettoforlinux.git</connection>
+        <developerConnection>scm:git:https://github.com/MSantarsiere/progettoforlinux.git</developerConnection>
     </scm>
     <developers>
         <developer>
@@ -144,7 +144,22 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>                
+            </plugin>   
+              
+            <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-gpg-plugin</artifactId>
+                  <version>1.6</version>
+                  <executions>
+                      <execution>
+                          <id>sign-artifacts</id>
+                          <phase>verify</phase>
+                          <goals>
+                              <goal>sign</goal>
+                          </goals>
+                      </execution>
+                  </executions>
+              </plugin>           
         </plugins>
     </build>
 </project>
