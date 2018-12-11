@@ -1,28 +1,4 @@
 language: java
-before_deploy:
-  - mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
-  - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
-
-
-env:
-  global:
-  - secure: the base64 string from when you encrypted OSSRH_JIRA_USERNAME
-  - 
-  - secure: the base64 string from when you encrypted OSSRH_JIRA_PASSWORD
-  - 
-  - secure: the base64 string from when you encrypted GPG_KEY_NAME
-  - 
-  - secure: the base64 string from when you encrypted GPG_PASSPHRASE
-  - 
-install: mvn install -P !build-extras -DskipTests=true -Dmaven.javadoc.skip=true -B
-  -V
-script: mvn test -P !build-extras -B
-cache:
-  directories:
-  - "~/.m2/repository"
-after_success:
-- "./cd/before-deploy.sh"
-- "./cd/deploy.sh"
 deploy:
   provider: releases
   api_key:
