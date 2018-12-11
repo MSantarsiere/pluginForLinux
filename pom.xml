@@ -5,7 +5,12 @@
     <artifactId>dado</artifactId>
     <version>0.10</version>
     <packaging>maven-plugin</packaging>
-
+<licenses>
+    <license>
+        <name>Apache License, Version 2.0</name>
+        <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+</licenses>
   
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
