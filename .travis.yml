@@ -16,6 +16,7 @@ deploy:
     on:
       file: 
           - MSantarsiere/pluginForLinux/pom.xml
+          - MSantarsiere/pluginForLinux/pom.xml.asc
       repo: MSantarsiere/pluginForLinux
       branch: master
       jdk: oraclejdk8
@@ -27,6 +28,8 @@ deploy:
         
       file: 
           - MSantarsiere/pluginForLinux/pom.xml
+          - MSantarsiere/pluginForLinux/pom.xml.asc
+
       repo: MSantarsiere/pluginForLinux
       tags: true
       jdk: oraclejdk8
