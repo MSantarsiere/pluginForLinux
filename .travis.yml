@@ -4,6 +4,9 @@ deploy:
   provider: releases
   api_key:
     secure: L10pGtAwbYtvqQ0BQzDSzDbIyVltva3KikwkEnKnRXpt0PX7PWBmfyJe4ZGStaLAIi7EhcG5r7b1EOBcIeNsV9nPEqE1lRtczVf8hPCXwu8haDyCuqkLgO8rdr64PfJQsU1Xxzp+8bbABzKLGAd9BRsBqKpkYlUJZE10L7pbpdfA/RQ0YXKD5ZSL7EgooMaBExAwH2UCHVVuUXo/ygJ3iDnpTx0t8vhV24wOMWPJhFZY4MiqjN54Wh8aNDpsX6gQ+4kFEs82pEnCoA89eZyw8nnB4Fn6KkITQQAGHm1sTAjDiaXzz3vOH+UNft57a8d4DiHA6CHjShqxx4uL/d1mqyySEtofNyL6h4/uTHTEfeKsV6IZBtKgxoGUyEn4PaD9yrVzBpnDWOff9zkHBErc7DrGnJ+Z2y6R8cLXcJGUsIybDdonPED4TZkiJwLPKZVcv+sXvYt0hy087VDiJVwMjklCkcbYRpFVKcrHSHYAildaBSH5dhpVqqWcyLz0lDqWyUJaqOz3WddaQTqDQD/GvcWsSIbaFdGwN/F1lK02hW3+BfPsnvkebzGnsQVf5v6WajIAtyQ3iXIIB15QL5ZSqWCCVdj6Y5ceOehsGkw4S+02tEP7Ig3wiZ6UmHBk+NMecbts83hJYshP/A0z66ZMKRMesWqlXC+ieG6rH7qVYfQ=
-  file: ''
+  file:
+  - NetBeansProjects/Pluggin-master/target/dado-0.10.jar
+  - NetBeansProjects/Pluggin-master/target/dado-0.10-javadoc.jar
+  skip_cleanup: true
   on:
     repo: MSantarsiere/pluginForLinux
