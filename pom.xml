@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.msantarsiere</groupId>
     <artifactId>dado</artifactId>
-    <version>0.11-SNAPSHOT</version>
+    <version>0.11</version>
     <packaging>maven-plugin</packaging>
     <name>dado</name>
     <description>This is small java plug-in.</description>
