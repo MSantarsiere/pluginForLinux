@@ -1,9 +1,30 @@
-lenguage: java
+language: java
+jdk:
+  - oraclejdk8
+install:
+  - mvn --settings .travis/settings.xml install -DskipTests=true -Dgpg.skip -Dmaven.javadoc.skip=true -B -V
+before_install:
+  - if [ ! -z "$GPG_SECRET_KEYS" ]; then echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import; fi
+  - if [ ! -z "$GPG_OWNERTRUST" ]; then echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust; fi
+
 deploy:
-  provider: releases
-  api_key:
-    secure: Ztdy3NTiWjuyZ+gT6WWMZHkfYdPUm5gVyenehotGfKh2r7xV22c91rubdGUIlFy1rNNWpW1gHJQxl4un9Qr+cGwAS1kycZJitl9cX8Sb/1RFWu3XfdjGRPUC15sj2Xvj39LmlvlOr0iR/ilL8OFf5HdBkN18d3NVDrs0dhHx3O8vj4fBAuFNSNaoi++SgktteeygQPN+azJkUDAWZfZOmxgXVgz+pSE/rItq75TkQadBROLsVitefof2rK45aSFq5DkeMbG6g1MhCHfcWKGGjmCv/f1fDsTkimGW6GJQKIgwDYBc/ulVZ+voLlhLgQfPyo/5L8bq32UMJfR4rRc5TzJnDN9rHKEX7ASZvFQVP83KE1HguYGzsthi/+l4QFcLfkmLbUB67uaBO8YNDXcPVhP1U19lvW6vB7PygW4+d7HNeTN5wgQIqwkAgrFX6CQUdKRb4aXfuco3PpfkQRQxqjeSDp3C7GNgj03nuBNNGGTKqpakmMbymkFAzFDNTp6CsYGGpAofF0FvXBzoshE9KiYhhksJ1VB8ooWsS8yCSKY6U7uTePCLPNJIeqp/27x/t0f6s9tlJcIHlQZ6uUfgVyHjiRH+/1eFaLrSzyjyP/B/yhz3RfC43trYLr1AvEDqdAyt2M/FYAvMYqsxSyypcajwE9ZkSSf33WQSRg+LzdE=
-  file: 
-  - /NetBeansProjects/Pluggin-master/target/dado-0.10.jar
-  on:
+  -
+   provider: script
+   script: .travis/deploy.sh
+   skip_cleanup: true
+   on:
+   file: 
+    - /NetBeansProjects/Pluggin-master/target/dado-0.10.jar
+   on:
     repo: MSantarsiere/pluginForLinux
+    branch: master
+    jdk: oraclejdk8
+  -
+    provider: script
+    script: .travis/deploy.sh
+    skip_cleanup: true
+    on:
+            repo: MSantarsiere/pluginForLinux
+            tags: true
+            jdk: oraclejdk8
+
