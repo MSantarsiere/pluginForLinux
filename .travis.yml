@@ -1,15 +1,9 @@
-language: java
-before_deploy:
-- mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
-- export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep
-  -v '\[')
+lenguage: java
 deploy:
   provider: releases
   api_key:
-    secure: M7bXTRH5hOy7gzl3i6VYwPCoQbXS7tDtdJ4iJDDw81VwqNAJ8ddYucGYYIYR+5NsWgATGTIM9bz3tsqUV7V8Y5ekEHBihvgvLInQtZddh0ixc7QPR9eoi9MVCnV6mTm2woyPqeu0l09XxmQoH7b6lIQ9drIvCa3QpSIRRVW7bF8qfnmZJOCpVHozW/LeJVOqBFh1M310iMptkAb0bfVTGhO2lp4b9sagJ+d8h0JZufKwWDdPzlHbiZJPGHatnEenkkAvqY2tG1QKpic52Toah0v4HiBX8FeGMgBJwe6B4Mm3Zhe7Hde0QHzfOQqfO0SDArVDOwLTNtNcZSKtyHT01qgVO/yVDC1XuIdYHZbR7HuAYs6SrKpkXjeNLXspgSMW/OM6pfyQy8li2DBz4PkZJyR09RV92lt49GIdqff8ENjAn9v9N2c9aNe0DILlehU1Pkh3JHWOAKfUBF5H+hyrcq1bg0YfzpbVwuhoLpk1A21hgHLZe0lE+jYPJxS8ddlB2fZ30Fzvj/7/i1MmVLh2bIS1A+RwbL96hHIahaJFV7HvhpWUWWJaJbzf4qR2d1C3NmfwHU538kLB4t9WwJGZT562qkPpOhqDUnGW0osKa5GcBB3a5iNdus3i71jZsxMHHnktVTrHau1HlhnHrZDJbmev8m6m0BOorxjmVN8K+2s=
+    secure: Ztdy3NTiWjuyZ+gT6WWMZHkfYdPUm5gVyenehotGfKh2r7xV22c91rubdGUIlFy1rNNWpW1gHJQxl4un9Qr+cGwAS1kycZJitl9cX8Sb/1RFWu3XfdjGRPUC15sj2Xvj39LmlvlOr0iR/ilL8OFf5HdBkN18d3NVDrs0dhHx3O8vj4fBAuFNSNaoi++SgktteeygQPN+azJkUDAWZfZOmxgXVgz+pSE/rItq75TkQadBROLsVitefof2rK45aSFq5DkeMbG6g1MhCHfcWKGGjmCv/f1fDsTkimGW6GJQKIgwDYBc/ulVZ+voLlhLgQfPyo/5L8bq32UMJfR4rRc5TzJnDN9rHKEX7ASZvFQVP83KE1HguYGzsthi/+l4QFcLfkmLbUB67uaBO8YNDXcPVhP1U19lvW6vB7PygW4+d7HNeTN5wgQIqwkAgrFX6CQUdKRb4aXfuco3PpfkQRQxqjeSDp3C7GNgj03nuBNNGGTKqpakmMbymkFAzFDNTp6CsYGGpAofF0FvXBzoshE9KiYhhksJ1VB8ooWsS8yCSKY6U7uTePCLPNJIeqp/27x/t0f6s9tlJcIHlQZ6uUfgVyHjiRH+/1eFaLrSzyjyP/B/yhz3RfC43trYLr1AvEDqdAyt2M/FYAvMYqsxSyypcajwE9ZkSSf33WQSRg+LzdE=
   file: 
   - /NetBeansProjects/Pluggin-master/target/dado-0.10.jar
-  skip_cleanup: true
   on:
     repo: MSantarsiere/pluginForLinux
-name: "$project_version"
