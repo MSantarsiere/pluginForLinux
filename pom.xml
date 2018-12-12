@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.msantarsiere</groupId>
     <artifactId>dado</artifactId>
-    <version>0.10</version>
+    <version>0.10-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <url> https://github.com/MSantarsiere/pluginForLinux</url>
     <licenses>
