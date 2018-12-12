@@ -1,14 +1,15 @@
 language: java
 before_deploy:
-  - mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
-  - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
-
+- mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
+- export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep
+  -v '\[')
 deploy:
   provider: releases
   api_key:
-    secure: mvZXY2L+VtF3tDrPjlDEBoajoHk75boDTqf2YNMA578MrPenkF3ghqOnS2d19MwbRRHNSj4Nt9E/+aLnxZnxXxpx7dBEh09AUUZhC8edLY7iF5fENOMoP5U+1y2G0CCY2NGFATQaNHiWrfz0IB9zr9nnILVHDbH3s+Tz9XgmMnaW1hmf/kLEMYJy9UbzCRgl1XcAUrZ/fm1buMYISWPlDMX+uJJHLf3lrope+bgIxMAQSWRr9npzMtVecLvLQmvDyRKvOGk5Fgtcvv22EuPqhT6izqmCe+wx9LlQRyp/JxrrvC72AbBlQCVnOLSWZXe3SZGoTyD8uQmXrjEVKo3diKk3AVK0yYEAR0kMCpSwbtarZab8eiuKAqNTJWre8z6pb8kYF9x31jIsnuQfYxeS5rkw+A1it6qa2j/7ojckj3BCeeNAf/XwF73dbIPR0VNJIO4R0PIPXFc+oqtb30HMSimrUgz5Ou3A29rvp2TdqRP70i02iD+0Uz4i4qk8MpDArGLM13tiVRyHfbhC7qL85lIu/kIC0aL1cz/gC947/Rr2YNK5OBuyhAUINfCVMmrBzpYdn2WNZCCkOcPEDzC5SSuT7PXpAHteMpwQ3VxowbJgXRQr7D1vuOonzPe7W2S4px5q781AqeNYnjmHwanSYM2m71fTa+5VuRMiXkIHoHY=
-  file: '/Pluggin-master/target/dado-0.10.jar'
+    secure: M7bXTRH5hOy7gzl3i6VYwPCoQbXS7tDtdJ4iJDDw81VwqNAJ8ddYucGYYIYR+5NsWgATGTIM9bz3tsqUV7V8Y5ekEHBihvgvLInQtZddh0ixc7QPR9eoi9MVCnV6mTm2woyPqeu0l09XxmQoH7b6lIQ9drIvCa3QpSIRRVW7bF8qfnmZJOCpVHozW/LeJVOqBFh1M310iMptkAb0bfVTGhO2lp4b9sagJ+d8h0JZufKwWDdPzlHbiZJPGHatnEenkkAvqY2tG1QKpic52Toah0v4HiBX8FeGMgBJwe6B4Mm3Zhe7Hde0QHzfOQqfO0SDArVDOwLTNtNcZSKtyHT01qgVO/yVDC1XuIdYHZbR7HuAYs6SrKpkXjeNLXspgSMW/OM6pfyQy8li2DBz4PkZJyR09RV92lt49GIdqff8ENjAn9v9N2c9aNe0DILlehU1Pkh3JHWOAKfUBF5H+hyrcq1bg0YfzpbVwuhoLpk1A21hgHLZe0lE+jYPJxS8ddlB2fZ30Fzvj/7/i1MmVLh2bIS1A+RwbL96hHIahaJFV7HvhpWUWWJaJbzf4qR2d1C3NmfwHU538kLB4t9WwJGZT562qkPpOhqDUnGW0osKa5GcBB3a5iNdus3i71jZsxMHHnktVTrHau1HlhnHrZDJbmev8m6m0BOorxjmVN8K+2s=
+  file: 
+  - /NetBeansProjects/Pluggin-master/target/dado-0.10.jar
   skip_cleanup: true
   on:
     repo: MSantarsiere/pluginForLinux
-name: $project_version
+name: "$project_version"
