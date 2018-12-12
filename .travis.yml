@@ -3,9 +3,6 @@ jdk:
   - oraclejdk8
 install:
   - mvn --settings .travis/settings.xml install -DskipTests=true -Dgpg.skip -Dmaven.javadoc.skip=true -B -V
-before_install:
-  - if [ ! -z "$GPG_SECRET_KEYS" ]; then echo $GPG_SECRET_KEYS | $GPG_EXECUTABLE --import; fi
-  - if [ ! -z "$GPG_OWNERTRUST" ]; then echo $GPG_OWNERTRUST |  $GPG_EXECUTABLE --import-ownertrust; fi
 
 deploy:
   -
