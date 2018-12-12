@@ -6,6 +6,7 @@
     <version>0.11-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <name>dado</name>
+    <description>This is small java plug-in.</description>
     <url> https://github.com/MSantarsiere/pluginForLinux</url>
     <licenses>
         <license>
