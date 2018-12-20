@@ -55,8 +55,8 @@ public class MyMojoStatementC extends AbstractMojo {
     private String msg;
 
     /**
-     *
-     *
+     * Controlla se la path del progetto è corretta
+     * 
      * @throws MojoExecutionException
      */
     public void execute()
@@ -102,7 +102,7 @@ public class MyMojoStatementC extends AbstractMojo {
      * @throws ParserConfigurationException
      * @throws SAXException
      */
-    private void openFile(String msg) throws IOException, ParserConfigurationException, SAXException {
+    public void openFile(String msg) throws IOException, ParserConfigurationException, SAXException {
         try {
             /*
              serve per pulire il file se già esiste
@@ -214,7 +214,7 @@ public class MyMojoStatementC extends AbstractMojo {
      * @param tes coniene il valore covered instruction
      * @param nodeMap4 contiene gli attributi di tempNode
      */
-    private void readJacoco(String msg) {
+   public void readJacoco(String msg) {
         try {
 
             File fXmlFile = new File(msg + "/target/site/jacoco/jacoco.xml");

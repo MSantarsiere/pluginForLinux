@@ -31,8 +31,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- * La classe si occupa di creare la copertura dei Branch con l'ausilio del file
- * Testsuite.xml, il risultato verrà salvato nel file matrice.csv che verrà
+ * La classe si occupa di creare la copertura degli statement con l'ausilio del
+ * file Testsuite.xml, il risultato verrà salvato nel file matrice.csv che verrà
  * utilizzata per re-prioritizzare il file Testsuite.xml
  *
  *
@@ -50,13 +50,13 @@ public class MyMojoBranchC extends AbstractMojo {
     @Parameter(property = "statementCoverage")
 
     /**
-     * @parameter msg tiene la path del pom del progetto che si prende
+     * @parameter msg contiene la path assoluta del progetto
      */
     private String msg;
 
     /**
-     *
-     *
+     * Controlla se la path del progetto è corretta
+     * 
      * @throws MojoExecutionException
      */
     public void execute()
@@ -102,7 +102,7 @@ public class MyMojoBranchC extends AbstractMojo {
      * @throws ParserConfigurationException
      * @throws SAXException
      */
-    private void openFile(String msg) throws IOException, ParserConfigurationException, SAXException {
+    public void openFile(String msg) throws IOException, ParserConfigurationException, SAXException {
         try {
             /*
              serve per pulire il file se già esiste
@@ -167,11 +167,11 @@ public class MyMojoBranchC extends AbstractMojo {
             WriteCvs.createNewXMl();
 
         } catch (ParserConfigurationException | SAXException ex) {
-            Logger.getLogger(MyMojoBranchC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyMojoStatementC.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TransformerException ex) {
-            Logger.getLogger(MyMojoBranchC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyMojoStatementC.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
-            Logger.getLogger(MyMojoBranchC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyMojoStatementC.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -214,7 +214,7 @@ public class MyMojoBranchC extends AbstractMojo {
      * @param tes coniene il valore covered instruction
      * @param nodeMap4 contiene gli attributi di tempNode
      */
-    private void readJacoco(String msg) {
+   public void readJacoco(String msg) {
         try {
 
             File fXmlFile = new File(msg + "/target/site/jacoco/jacoco.xml");
@@ -251,7 +251,7 @@ public class MyMojoBranchC extends AbstractMojo {
 
                         for (int i = 0; i < nodeMap4.getLength(); i++) {
                             Node node = nodeMap4.item(i);
-                            String tes = "cb";
+                            String tes = "ci";
 
                             if (tes.equals(node.getNodeName())) {
                                 Node node1 = node;

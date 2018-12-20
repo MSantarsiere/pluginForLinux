@@ -28,7 +28,7 @@ import org.uma.jmetal.util.fileoutput.SolutionListOutput;
 import org.uma.jmetal.util.fileoutput.impl.DefaultFileOutputContext;
 
 /**
- *Utilizza l'algoritmo genetico per repriorizzare la test suite
+ *Utilizza l'algoritmo genetico per reprioritizzare la test suite
  * 
  * @author Rembor
  */
@@ -88,27 +88,10 @@ public class AS {
                 .setVarFileOutputContext(new DefaultFileOutputContext(outputFolder + "/VAR.txt"))
                 .print();
 
-        printAFDPc(problem, population, outputFolder);
+
       
     }
-/**
- *  Stampa il risultato dell'algoritmo  nel file AFDP
- * @param problem contiene il risultato del problema
- * @param population contiene la popoazione
- * @param outputFolder contiene la path per il file output
- * @throws IOException 
- */
-    private static void printAFDPc(GenericPrioritizationProblem problem, List<PermutationSolution<Integer>> population,
-            String outputFolder) throws IOException {
-        BufferedWriter afdpcBW = new DefaultFileOutputContext(outputFolder + "/AFDP.txt").getFileWriter();
-        List<Double> afdpcList = new AFDPc(problem).evaluate(population);
 
-        for (double afdpc : afdpcList) {
-            afdpcBW.append(String.valueOf(afdpc)).append("\n");
-        }
-        
-        afdpcBW.close();
-    }
 
    
 

@@ -105,7 +105,7 @@ public class WriteCvs {
      * @param scanner contiene il valore del stringa
      *
      */
-    static void createCostMatrix() {
+ public   static void createCostMatrix() {
         if (file1.exists()) {
             PrintWriter writer;
             try {
