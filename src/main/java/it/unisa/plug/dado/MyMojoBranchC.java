@@ -47,7 +47,7 @@ public class MyMojoBranchC extends AbstractMojo {
      * di un progetto
      *
      */
-    @Parameter(property = "statementCoverage")
+    @Parameter(property = "branchCoverage")
 
     /**
      * @parameter msg contiene la path assoluta del progetto
