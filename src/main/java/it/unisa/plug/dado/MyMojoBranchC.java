@@ -251,7 +251,7 @@ public class MyMojoBranchC extends AbstractMojo {
 
                         for (int i = 0; i < nodeMap4.getLength(); i++) {
                             Node node = nodeMap4.item(i);
-                            String tes = "ci";
+                            String tes = "cb";
 
                             if (tes.equals(node.getNodeName())) {
                                 Node node1 = node;
