@@ -1,10 +1,10 @@
 # pluginForLinux
-per utilizzare il plug-in bisogna chiamarlo come dipendenza 
-<dependency>
+ per utilizzare il plug-in bisogna chiamarlo come dipendenza 
+  <dependency>
   <groupId>io.github.msantarsiere</groupId>
   <artifactId>dado</artifactId>
     <version>0.13</version>
-</dependency>
+ </dependency>
 
 
 
