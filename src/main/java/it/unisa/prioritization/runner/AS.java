@@ -28,17 +28,23 @@ import org.uma.jmetal.util.fileoutput.SolutionListOutput;
 import org.uma.jmetal.util.fileoutput.impl.DefaultFileOutputContext;
 
 /**
- *
+ *Utilizza l'algoritmo genetico per repriorizzare la test suite
+ * 
  * @author Rembor
  */
 public class AS {
-
+/**
+ * Prepara l'occorrente per l'algoritmo di riprioritizzazione
+ * 
+ * @param msg contiene la path assoluta del progetto
+ * @throws InterruptedException
+ * @throws IOException 
+ */
     public static void matrixce(String msg) throws InterruptedException, IOException {
         String outputFolder = msg;
         String file = msg + "/matrice.csv";
         ArrayList<ArrayList<Integer>> ma= WriteCvs.getM();
         String file1 = msg + "/matricecosti.csv";
-        String file2 = msg + "/matricefault.csv";
         CoverageMatrix a = new CoverageMatrix(file, false);
         CumulativeCoverage b = new CumulativeCoverage(a);
         //System.out.println(b.getMaxCoverage());
@@ -82,13 +88,19 @@ public class AS {
                 .setVarFileOutputContext(new DefaultFileOutputContext(outputFolder + "/VAR.txt"))
                 .print();
 
-        printAFDPc(problem, population, outputFolder, 1);
+        printAFDPc(problem, population, outputFolder);
       
     }
-
+/**
+ *  Stampa il risultato dell'algoritmo  nel file AFDP
+ * @param problem contiene il risultato del problema
+ * @param population contiene la popoazione
+ * @param outputFolder contiene la path per il file output
+ * @throws IOException 
+ */
     private static void printAFDPc(GenericPrioritizationProblem problem, List<PermutationSolution<Integer>> population,
-            String outputFolder, int run) throws IOException {
-        BufferedWriter afdpcBW = new DefaultFileOutputContext(outputFolder + "/AFDP." + run).getFileWriter();
+            String outputFolder) throws IOException {
+        BufferedWriter afdpcBW = new DefaultFileOutputContext(outputFolder + "/AFDP.txt").getFileWriter();
         List<Double> afdpcList = new AFDPc(problem).evaluate(population);
 
         for (double afdpc : afdpcList) {

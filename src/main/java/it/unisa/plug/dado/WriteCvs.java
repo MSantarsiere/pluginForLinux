@@ -44,20 +44,36 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
+ * Crea la matrice di copertura e riordina la testsuite
+ *
  *
  * @author Rembor
  */
 public class WriteCvs {
 
     // stampa il csv nella base directory del progetto
+    /**
+     * @param file contiene il file della matrice
+     * @param file1 contiene il file del costo della matrice
+     */
     static private File file = new File("matrice.csv");
     static private File file1 = new File("matricecosti.csv");
-   static ArrayList<ArrayList<Integer>> matrice = new ArrayList<ArrayList<Integer>>();
+    static ArrayList<ArrayList<Integer>> matrice = new ArrayList<ArrayList<Integer>>();
 
+    /**
+     * Crea la matrice di copertura
+     *
+     * @param linea contiene la lista dei valori di copertura, 0 per non coperto
+     * 1 per coperto
+     * @param fw contien la matrice
+     * @param bw contiene il buffer
+     * @param out contiene l'output
+     *
+     */
     public static void writeDataAtOnce(ArrayList<Integer> linea) {
-  matrice.add(linea);
+        matrice.add(linea);
         try {
-         
+
             FileWriter fw = new FileWriter(file, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw);
@@ -65,7 +81,7 @@ public class WriteCvs {
             for (int i = 0; i < linea.size(); i++) {
                 System.out.print(linea.get(i) + "  ");
                 int indice = linea.get(i);
-               
+
                 out.print(indice + " ");
             }
             out.println();
@@ -77,6 +93,18 @@ public class WriteCvs {
 
     }
 
+    /**
+     * Crea la matrice di costi
+     *
+     * @param writer contiene il file
+     * @param br contiene il buffer
+     * @param fr contiene lo strumento per leggere il file
+     * @param fw contien la matrice
+     * @param bw contiene il buffer
+     * @param out contiene l'output
+     * @param scanner contiene il valore del stringa
+     *
+     */
     static void createCostMatrix() {
         if (file1.exists()) {
             PrintWriter writer;
@@ -133,14 +161,31 @@ public class WriteCvs {
         }
     }
 
-//
-//    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, TransformerException {
-//        File permutazioni=new File("Var.txt");
-//               
-//              WriteCvs.createNewXMl(permutazioni);
-//    }
+    /**
+     * Riorganizza la test suite in base al contenuto del file Var.txt
+     *
+     * @param permutazioni contine il file Var
+     * @param array legge i valori presenti in Var
+     * @param r contiene il file Var
+     * @param scanner contiene il valore di Var
+     * @param line contiene la linea presente in Var
+     * @param documentFactory contiene l'istanza xml
+     * @param documentBuilder contiene il costruttore del file xml
+     * @param document1 contiene la nuova TestSuite
+     * @param xmlFile contiene il file della TestSuite
+     * @param root contiene la root del file xml
+     * @param nodeList contiene il tag Test Case
+     * @param attr contiene l'attributo id
+     * @param firstName contiene l'attributo classe
+     * @param lastname contine l'attributo method
+     *
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws IOException
+     * @throws TransformerException
+     */
     static void createNewXMl() throws ParserConfigurationException, SAXException, IOException, TransformerException {
-              File permutazioni=new File("VAR.txt");
+        File permutazioni = new File("VAR.txt");
 
         String[] array = null;
         BufferedReader r = new BufferedReader(new FileReader(permutazioni));
@@ -171,8 +216,6 @@ public class WriteCvs {
 
         document.getDocumentElement().normalize();
 
-      //  System.out.println("Root element name :- " + document.getDocumentElement().getNodeName());
-
         NodeList nodeList = document.getElementsByTagName("TestCase");
 
         for (int indice = 0; indice < array.length; indice++) {
@@ -180,16 +223,10 @@ public class WriteCvs {
 
                 Node node = nodeList.item(i);
 
-        //        System.out.println("\nCurrent element name :- " + node.getNodeName());
-          //      System.out.println("-------------------------------------");
-
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element element = (Element) node;
                     if (element.getAttribute("id").equals(array[indice])) {
-            //            System.out.println("Employee id :- " + element.getAttribute("id"));
-              //          System.out.println("Employee Name : " + element.getElementsByTagName("Class").item(0).getTextContent());
-                //        System.out.println("Email: " + element.getElementsByTagName("method").item(0).getTextContent());
                         Element employee = document1.createElement("TestCase");
 
                         root.appendChild(employee);
@@ -218,21 +255,27 @@ public class WriteCvs {
         DOMSource domSource = new DOMSource(document1);
         StreamResult streamResult = new StreamResult(new File("testSuite.xml"));
 
-			// If you use
-        // StreamResult result = new StreamResult(System.out);
-        // the output will be pushed to the standard output ...
-        // You can use that for debugging 
         transformer.transform(domSource, streamResult);
 
         System.out.println("Done creating XML File");
 
     }
-    static public void stampaM(){
-        for(int i=0;i<matrice.size();i++){
+
+    /**
+     * permette di stampare la matrice di copertura
+     */
+    static public void stampaM() {
+        for (int i = 0; i < matrice.size(); i++) {
             System.out.println(matrice.get(i));
         }
     }
-    static public ArrayList<ArrayList<Integer>> getM(){
+
+    /**
+     * Restituisce la matrice di copertura
+     *
+     * @return matrice contiene la matrice di copertura
+     */
+    static public ArrayList<ArrayList<Integer>> getM() {
         return matrice;
     }
 }

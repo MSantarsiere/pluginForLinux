@@ -14,7 +14,10 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * esplora il file java e legge i metodi
+ * @author Rembor
+ */
 public class VoidVisitorComplete {
 
     static class MethodNamePrinter extends VoidVisitorAdapter<Void> {

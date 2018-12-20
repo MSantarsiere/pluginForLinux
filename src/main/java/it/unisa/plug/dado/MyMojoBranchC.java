@@ -31,21 +31,34 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
+ * La classe si occupa di creare la copertura dei Branch con l'ausilio del file
+ * Testsuite.xml, il risultato verrà salvato nel file matrice.csv che verrà
+ * utilizzata per re-prioritizzare il file Testsuite.xml
+ *
  *
  * @author Rembor
+ *
  */
-@Mojo(name = "hello2")
+@Mojo(name = "branchCoverage")
 public class MyMojoBranchC extends AbstractMojo {
 
-    @Parameter(property = "msg")
+    /**
+     * @parameter permette di assegnare il valore a msg tramite chiamata dal pom
+     * di un progetto
+     *
+     */
+    @Parameter(property = "statementCoverage")
 
     /**
-     * My File.
-     *
      * @parameter msg tiene la path del pom del progetto che si prende
      */
     private String msg;
 
+    /**
+     *
+     *
+     * @throws MojoExecutionException
+     */
     public void execute()
             throws MojoExecutionException {
 
@@ -54,18 +67,41 @@ public class MyMojoBranchC extends AbstractMojo {
 
             openFile(msg);
         } catch (IOException | ParserConfigurationException | SAXException ex) {
-            Logger.getLogger(MyMojo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyMojoStatementC.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    /**
+     * Permette di conoscere il valore di msg
+     *
+     * @return msg contiene la path assoluta del progetto
+     */
     public String getMsg() {
         return msg;
     }
 
+    /**
+     * permette di settare il valore di msg
+     *
+     * @param msg contiene la path assoluta del progetto
+     */
     public void setMsg(String msg) {
         this.msg = msg;
     }
 
+    /**
+     * Si occupa di creare la matrice tramite la test Suite
+     *
+     * @param msg contiene la path assoluta del progetto
+     * @param file1 contiene la matrice di copertura
+     * @param file contiene la test suite del progetto chiamante
+     * @param class contiene il nome della classe utilizzata
+     * @param method contiene il nome del metodo chiamato
+     * @param tr contiene la chiamata a sistema per lanciare i test
+     * @throws IOException
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     */
     private void openFile(String msg) throws IOException, ParserConfigurationException, SAXException {
         try {
             /*
@@ -79,10 +115,11 @@ public class MyMojoBranchC extends AbstractMojo {
                 writer.close();
             }
             File file = new File("testSuite.xml");
-            if(!file.exists()){
+            if (!file.exists()) {
+
                 ListClassesExample.listClasses(msg);
             }
-            
+
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
                     .newInstance();
             DocumentBuilder documentBuilder;
@@ -94,29 +131,22 @@ public class MyMojoBranchC extends AbstractMojo {
             Document doc = dBuilder.parse(file);
             doc.getDocumentElement().normalize();
             NodeList nList = doc.getElementsByTagName("TestCase");
-//            String mvn = getMvnCommand();
-
+            //     String mvn = getMvnCommand();
 
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
-     
+
                 System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
-                                   
-
 
                     String classe = eElement.getElementsByTagName("Class").item(0).getTextContent();
 
                     String method = eElement.getElementsByTagName("method").item(0).getTextContent();
-                    /*
-                     Serve per evitare il bug dovuto al fatto che il plugin non riconosce se sia mvn.bat o 
-                     mvn.cmd funziona solo per windows
-                     */
 
-                    Process tr = Runtime.getRuntime().exec( " mvn clean verify -f " + msg + "/pom.xml -Dtest=" + classe + "#" + method);
-                    getLog().info("Hello  lanciaato il comando" + " mvn clean verify -f " + msg + "/pom.xml -Dtest=" + classe + "#" + method);
+                    Process tr = Runtime.getRuntime().exec("mvn clean verify -f " + msg + "/pom.xml -Dtest=" + classe + "#" + method);
+                    getLog().info("Hello  lanciaato il comando mvn clean verify -f " + msg + "/pom.xml -Dtest=" + classe + "#" + method);
                     //se non hai l'ssd metto in attesa il processo altrimenti non si ha il tempo di creare il jacoco.xml         
                     BufferedReader stdOut = new BufferedReader(new InputStreamReader(tr.getInputStream()));
                     String s;
@@ -130,24 +160,23 @@ public class MyMojoBranchC extends AbstractMojo {
                 }
 
             }
-            
+
             WriteCvs.createCostMatrix();
-              AS.matrixce(msg);
-              
-               
-              WriteCvs.createNewXMl();
-                      
+            AS.matrixce(msg);
+
+            WriteCvs.createNewXMl();
+
         } catch (ParserConfigurationException | SAXException ex) {
-            Logger.getLogger(MyMojo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyMojoBranchC.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TransformerException ex) {
-            Logger.getLogger(MyMojoStatementC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyMojoBranchC.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
-            Logger.getLogger(MyMojoStatementC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyMojoBranchC.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-   /* public static String getMvnCommand() {
+    /*  public static String getMvnCommand() {
         String mvnCommand = "mvn";
         if (File.separatorChar == '\\') {
             mvnCommand = findExecutableOnPath("mvn.cmd");
@@ -157,7 +186,8 @@ public class MyMojoBranchC extends AbstractMojo {
         }
         return mvnCommand;
     }
-*/
+     */
+ /*
     public static String findExecutableOnPath(String name) {
         for (String dirname : System.getenv("PATH").split(File.pathSeparator)) {
             File file = new File(dirname, name);
@@ -167,10 +197,26 @@ public class MyMojoBranchC extends AbstractMojo {
         }
         return null;
     }
-
+     */
+    /**
+     * legge il file jacoco per creare la matrice di copertura tramite la classe
+     * metodo chiamati
+     *
+     * @param msg contiene la path assoluta del progetto
+     * @param fXmlFile contiene la path del file jacoco
+     * @param dbf istanza per leggere il file xml
+     * @param db contiene il file xml
+     * @param doc contiene il file ben formato
+     * @param list3 contiene i nodi con la tag line
+     * @param stringa contiene la lista dei valori di copertura, 0 per non
+     * coperto 1 per coperto
+     * @param tempNode contiene una linea
+     * @param tes coniene il valore covered instruction
+     * @param nodeMap4 contiene gli attributi di tempNode
+     */
     private void readJacoco(String msg) {
         try {
-           
+
             File fXmlFile = new File(msg + "/target/site/jacoco/jacoco.xml");
 
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -187,7 +233,7 @@ public class MyMojoBranchC extends AbstractMojo {
             Document doc = db.parse(fXmlFile);
             NodeList list3 = doc.getElementsByTagName("line");
 
-                  //  System.out.println(list3.getLength());
+            //  System.out.println(list3.getLength());
             ArrayList<Integer> stringa = new ArrayList<>();
 
             for (int count = 0; count < list3.getLength(); count++) {

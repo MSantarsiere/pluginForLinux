@@ -8,7 +8,8 @@ package it.unisa.plug.dado;
 import java.io.File;
 
 /**
- *
+ * permette di esplorare la Directory del progetto
+ * per cercare i file che terminano con .java
  * @author Rembor
  */
 public class DirExplorer {
@@ -34,7 +35,12 @@ public class DirExplorer {
     public void explore(File root) {
         explore(0, "", root);
     }
-
+/**
+ *Esplora tutta la directory in cerca dei file che finiscono in .java
+ * @param level contiene il valore della directory
+ * @param path contiene la path della src del progetto
+ * @param file contiene il file trovato
+ */
     private void explore(int level, String path, File file) {
         if (file.isDirectory()) {
             for (File child : file.listFiles()) {
