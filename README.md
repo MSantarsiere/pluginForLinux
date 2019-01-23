@@ -1,17 +1,6 @@
 # pluginForLinux
- per utilizzare il plug-in bisogna chiamarlo come dipendenza 
-  <dependency>
-  <groupId>io.github.msantarsiere</groupId>
-  <artifactId>dado</artifactId>
-    <version>0.13</version>
- </dependency>
-
-
-
-
 
 Per utilizzare il plug-in per la statementCoverage inserire nel pom
-
 
             <plugin>
                 <groupId>io.github.msantarsiere</groupId>
