@@ -15,7 +15,7 @@ Per utilizzare il plug-in per la statementCoverage inserire nel pom
 
             <plugin>
                 <groupId>io.github.msantarsiere</groupId>
-                <artifactId>dado</artifactId>
+                <artifactId>rift</artifactId>
                 <version>0.13</version>
                  <executions>	                
                     <execution>                	
