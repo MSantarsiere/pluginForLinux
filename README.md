@@ -10,7 +10,8 @@ Per utilizzare il plug-in per la statementCoverage inserire nel pom
                     <execution>                	
                         <phase>install</phase>
                         <goals>
-                            <goal>branchCoverage</goal> 
+                            <goal>statementCoverage</goal> 
+                           
                        </goals>
                         <configuration> 
                             <msg>
@@ -31,7 +32,7 @@ Per utilizzare il plug-in per la statementCoverage inserire nel pom
                         <phase>install</phase>
                         <goals>
                            
-                           <goal>statementCoverage</goal> 
+                            <goal>branchCoverage</goal> 
                        </goals>
                         <configuration> 
                             <msg>
